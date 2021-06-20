@@ -32,6 +32,8 @@ public class GeneralService implements Service{
                 isContain = true;
             }
         }
+        fileReader.close();
+        scanner.close();
         return isContain;
     }
 
