@@ -8,9 +8,11 @@ public class Cat extends Animal{
         System.out.println("may may");
     }
 
+
+
     // Перезагрущзка метода (одно и то же название, но разна логика и принимаемые значения):
-    private int voice(int i){
-        return 2;
+    private void voice(int i){
+        System.out.println("Cat");
     }
 
 }
