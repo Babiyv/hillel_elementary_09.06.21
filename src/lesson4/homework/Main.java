@@ -49,6 +49,7 @@ public class Main {
         Client clientSender = new Client("14", "clientSurname", inputSenderAccountId, sumOfTransaction);
         TransactionService.moneyTransaction(clientSender, inputRecipientAccountId);
         System.out.println("Money transaction is successful!");
+        sc.close();
     }
 
     private static Double checkTheSumOfTransaction(Double sumOfTransaction, Scanner sc) {
