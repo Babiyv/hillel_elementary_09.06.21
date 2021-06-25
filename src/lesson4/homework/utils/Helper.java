@@ -29,8 +29,8 @@ public class Helper {
     }
 
 //    4.3:
-    public static void checkTransactionClientsAccountsId (Client sender, Client recipient){
-        if (sender.getClientAccountId().equals(recipient.getClientAccountId())){
+    public static void checkTransactionClientsAccountsId (String senderClientAccountId, String recipientClientAccountId){
+        if (senderClientAccountId.equals(recipientClientAccountId)){
             throw new UserExpectedError();
         }
     }

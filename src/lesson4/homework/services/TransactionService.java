@@ -7,7 +7,7 @@ import lesson4.homework.utils.Helper;
 Передача Денег. Этот метод на вход принимает 2 параметра (сущность Клиент и Идентификатор Аккаунта клиента) и ничего не возвращает.
 Внутри идет вызов созданного Класса-хелпера, метода 3.*/
 public class TransactionService {
-    public static void getCheckTransactionClientsAccountId (Client client, String clientAccountId){
-        Helper.checkTransactionClientsAccountsId();
+    public static void moneyTransaction (Client client, String clientAccountId){
+        Helper.checkTransactionClientsAccountsId(client.getClientAccountId(), clientAccountId);
     }
 }
