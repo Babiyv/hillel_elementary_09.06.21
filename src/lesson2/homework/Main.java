@@ -39,14 +39,17 @@ public class Main {
     }
 
     private static Information extraMethod(List<? extends Number> listOfWraps, Information information) {
-        for (int i = 0; i < listOfWraps.size(); i++) {
-            String nickname = listOfWraps.get(i).toString();
-            String email = listOfWraps.get(i).toString().concat("@gmail.com");
+        for (Number listOfWrap : listOfWraps) {
+            String nickname = listOfWrap.toString();
+            String email = listOfWrap.toString().concat("@gmail.com");
             information.getUsersNicknameList().add(nickname);
-            information.getUsersEmailSet().add(email);
 
-            if (!information.getEmailToNicknameMap().containsKey(email)){
-              information.getEmailToNicknameMap().put(email, nickname);
+            if (!information.getUsersEmailSet().contains(email)) {
+                information.getUsersEmailSet().add(email);
+            }
+
+            if (!information.getEmailToNicknameMap().containsKey(email)) {
+                information.getEmailToNicknameMap().put(email, nickname);
             }
         }
         return information;
