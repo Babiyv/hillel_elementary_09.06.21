@@ -1,5 +1,8 @@
 package lesson2;
 
+import lesson1.Animal;
+import lesson1.Cat;
+
 import java.util.*;
 
 public class Main {
@@ -50,5 +53,22 @@ public class Main {
         System.out.println(map.remove("key")); // - возвращает значения которое мы удалили по ключу;
         System.out.println(map.remove(1, "value2")); // - возвращает булевское значение после удаления;
 
+        List<String> list = new ArrayList<>();
+        list.add("asdasd");
+//        list.add(2); // - сразу будет подчеркивать, потому что пытаемся передать интеджер в лист со стринговым дженериком
+//        list.add(2d); // - сразу будет подчеркивать, потому что пытаемся передать интеджер в лист со стринговым дженериком
+        System.out.println(list);
+
+        List<Cat> cats = new ArrayList<>();
+
     }
+
+    public static void test(List<? extends Animal> list){ // - позволяет выполнять логику для всех классов наследников
+        list.get(0);
+    }
+
+    public static void test1(List<? super Animal> list){ // - позволяет выполнять логику не только с наследниками, но и с родительскими классами
+        list.get(0);
+    }
+
 }
