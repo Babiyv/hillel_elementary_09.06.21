@@ -40,7 +40,7 @@ public class GeneralService implements Service{
     /* ВОПРОС: учили что лучше использоовать "concat" вместо "+", нормально ли писать как в данном случае?
         *нарошно сделал такую кракозябру*/
     @Override
-    public void WriteEntityDataToFile(Person person, String pathToFile) throws IOException {
+    public void writeEntityDataToFile(Person person, String pathToFile) throws IOException {
         System.out.println("Извините, данное действие доступно только для ".concat(Role.ADMIN.toString()).concat(", а ваш статус ").concat(Role.USER.toString()));
     }
 }

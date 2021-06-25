@@ -11,7 +11,7 @@ public class AdminService extends GeneralService{
 
 //    лажа в том, что метод будет записывать каждый раз при выполнении кода, за счет чего можно наплодить дубликатов :(
     @Override
-    public void WriteEntityDataToFile(Person person, String pathToFile) throws IOException {
+    public void writeEntityDataToFile(Person person, String pathToFile) throws IOException {
         FileWriter fileWriter = new FileWriter(pathToFile, true); // - булевое значение true вписали для того, чтобы строка добавлялась в существующий файл, иначе он каждый раз будет удаляться и создавться новый со всеми строками;
         fileWriter.write(person.toString());
         fileWriter.close();

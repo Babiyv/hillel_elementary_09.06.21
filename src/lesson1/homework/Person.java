@@ -8,12 +8,13 @@ public class Person {
     private String password;
     private Role role;
 
-    public Person(String name, String surname, int age, String email, String password) {
+    public Person(String name, String surname, int age, String email, String password, Role role) {
         this.name = name;
         this.surname = surname;
         this.age = age;
         this.email = email;
         this.password = password;
+        this.role = role;
     }
 
     public String getName() {

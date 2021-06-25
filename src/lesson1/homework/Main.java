@@ -18,14 +18,14 @@ public class Main {
 
 //      4.2. С любым из сущностей вызвать UserService(Записать данные пользователя) - убедиться, что наш запрет работает и выводиться нужное сообщение.
         UserService userService = new UserService();
-        userService.WriteEntityDataToFile(admin, PATH_TO_DATAFILE);
-        userService.WriteEntityDataToFile(user, PATH_TO_DATAFILE);
-
+        /*userService.writeEntityDataToFile(admin, PATH_TO_DATAFILE);
+        userService.writeEntityDataToFile(user, PATH_TO_DATAFILE);
+*/
 //      4.3. С каждой из сущностей вызвать AdminService(Записать данные пользователя) - сохранить данные в файлик.
         AdminService adminService = new AdminService();
-        adminService.WriteEntityDataToFile(admin, PATH_TO_DATAFILE);
-        adminService.WriteEntityDataToFile(user, PATH_TO_DATAFILE); // ВОПРОС: почему-то записало в файл без разрыва с верхней записью (а если выводить просто на консоль, то разрыв есть);
-
+       /* adminService.writeEntityDataToFile(admin, PATH_TO_DATAFILE);
+        adminService.writeEntityDataToFile(user, PATH_TO_DATAFILE); // ВОПРОС: почему-то записало в файл без разрыва с верхней записью (а если выводить просто на консоль, то разрыв есть);
+*/
 //      4.4. С сущностью Admin вызвать сервис UserService(Проверить пользователя) - убедиться что данный пользователь есть в файлике.
         System.out.println(userService.checkUser(admin, PATH_TO_DATAFILE));
 

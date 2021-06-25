@@ -19,5 +19,5 @@ import java.io.IOException;
 */
 public interface Service {
     boolean checkUser(Person person, String pathToFile) throws IOException;
-    void WriteEntityDataToFile(Person person, String pathToFile) throws IOException;
+    void writeEntityDataToFile(Person person, String pathToFile) throws IOException;
 }
