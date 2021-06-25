@@ -1,6 +1,9 @@
 package lesson4.homework;
 
+import lesson4.homework.entities.Client;
 import lesson4.homework.exceptions.WrongFieldException;
+import lesson4.homework.exceptions.WrongSumException;
+import lesson4.homework.services.TransactionService;
 import lesson4.homework.utils.Helper;
 
 import java.util.Arrays;
@@ -30,7 +33,35 @@ public class Main {
 //        6.1
         System.out.print("Please enter your account ID: ");
         String inputSenderAccountId = sc.nextLine();
-        inputSenderAccountId = checkAccountIdLength(inputSenderAccountId, sc);
+        inputSenderAccountId = checkAccountIdLength(inputSenderAccountId, sc); // *вынес отдельным методом, чтобы не дублировать код в 6.2
+
+//        6.2
+        System.out.print("Please enter recipient account ID: ");
+        String inputRecipientAccountId = sc.nextLine();
+        inputRecipientAccountId = checkAccountIdLength(inputRecipientAccountId, sc);
+
+//        6.3
+        System.out.print("Sum of transaction: ");
+        Double sumOfTransaction = sc.nextDouble();
+        sumOfTransaction = checkTheSumOfTransaction(sumOfTransaction, sc); // *хоть и не дублируется, но вынес отдельным методом, потому что помню как говорили на паре о том, что код удобнее читать и фиксить когда он разбит на методы;
+
+//        6.4
+        Client clientSender = new Client("14", "clientSurname", inputSenderAccountId, sumOfTransaction);
+        TransactionService.moneyTransaction(clientSender, inputRecipientAccountId);
+        System.out.println("Money transaction is successful!");
+    }
+
+    private static Double checkTheSumOfTransaction(Double sumOfTransaction, Scanner sc) {
+        while (sumOfTransaction > 1000) {
+            try {
+                Helper.checkTheSum(sumOfTransaction);
+            } catch (WrongSumException e) {
+                e.printStackTrace(); // *Специально оставил два разных варианта как шпаргалку на будущее. Предыдущий вариант писал ручками, а тут автоматом сгенерировало чуть иначе, но вроде тоже самое (только другим цветом);
+            }
+            System.out.print("Sorry, but you can`t send more than 1000. \nPlease enter sum less than 1000: ");
+            sumOfTransaction = sc.nextDouble();
+        }
+        return sumOfTransaction;
     }
 
     private static String checkAccountIdLength(String inputClientAccountId, Scanner sc) throws WrongFieldException {
@@ -44,19 +75,6 @@ public class Main {
             System.out.print("Please enter correct your account ID. It must contain 10 symbols: ");
             inputClientAccountId = sc.nextLine();
         }
-
-/*        try {
-            if (inputClientAccountId.length() != 10) {
-                Helper.checkClientAccountIdSize(inputClientAccountId);
-            }
-        }catch (WrongFieldException wfe) {
-            while (inputClientAccountId.length() != 10) {
-                System.out.println(wfe);
-                System.out.println(Arrays.toString(wfe.getStackTrace())); // .getStackTrace() - отображает более глубинно и подробно откуда вылазит ошибка;
-                System.out.print("Please enter correct your account ID. It must contain 10 symbols: ");
-                inputClientAccountId = sc.nextLine();
-            }
-        }*/
         return inputClientAccountId;
     }
 }

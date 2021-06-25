@@ -1,8 +1,8 @@
 package lesson4.homework.utils;
 
-import lesson4.homework.entities.Client;
 import lesson4.homework.exceptions.UserExpectedError;
 import lesson4.homework.exceptions.WrongFieldException;
+import lesson4.homework.exceptions.WrongSumException;
 
 /*4. В папке ‘utils’ создать Класс-хелпер для проверки параметров:
 4.1. Метод 1: Входящим параметром принимает Идентификатор Аккаунта клиента и ничего не возвращает.
@@ -14,27 +14,24 @@ import lesson4.homework.exceptions.WrongFieldException;
 *4.4. Данные методы не знают как обрабатывать эти ошибки*/
 public class Helper {
 
-//    4.1:
+    //    4.1:
     public static void checkClientAccountIdSize(String clientAccountId) throws WrongFieldException {
-        if (clientAccountId.length() != 10){
+        if (clientAccountId.length() != 10) {
             throw new WrongFieldException();
         }
     }
 
-//    4.2:
-    public static void checkSum (Double sum) throws WrongFieldException {
-        if (sum > 1000){
-            throw new WrongFieldException();
+    //    4.2:
+    public static void checkTheSum(Double sum) throws WrongSumException { // добавил бы еще чтобы принимал сумму ограничения, чтобы если она менялась (например законодательно), то можно было бы это легко править в самой программе;
+        if (sum > 1000) {
+            throw new WrongSumException();
         }
     }
 
-//    4.3:
-    public static void checkTransactionClientsAccountsId (String senderClientAccountId, String recipientClientAccountId){
-        if (senderClientAccountId.equals(recipientClientAccountId)){
+    //    4.3:
+    public static void checkTransactionClientsAccountsId(String senderClientAccountId, String recipientClientAccountId) {
+        if (senderClientAccountId.equals(recipientClientAccountId)) {
             throw new UserExpectedError();
         }
     }
-
-
-
 }
