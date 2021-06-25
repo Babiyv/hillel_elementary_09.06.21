@@ -4,6 +4,11 @@ public abstract class AbstractAnimal implements AnimalInterface { // - поск�
 
     @Override
     public void run() {
-        System.out.println("run");
+
+    }
+
+    @Override
+    public void voice() {
+
     }
 }
