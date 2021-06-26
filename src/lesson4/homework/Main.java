@@ -50,10 +50,11 @@ public class Main {
         TransactionService.moneyTransaction(clientSender, inputRecipientAccountId);
         System.out.println("Money transaction is successful!");
         sc.close();
+
     }
 
     private static Double checkTheSumOfTransaction(Double sumOfTransaction, Scanner sc) {
-        while (sumOfTransaction > 1000) {
+        while (sumOfTransaction > Helper.getMaxSum()) {
             try {
                 Helper.checkTheSum(sumOfTransaction);
             } catch (WrongSumException e) {
@@ -66,7 +67,7 @@ public class Main {
     }
 
     private static String checkAccountIdLength(String inputClientAccountId, Scanner sc) throws WrongFieldException {
-        while (inputClientAccountId.length() != 10) {
+        while (inputClientAccountId.length() != Helper.getMandatoryAccountIdLength()) {
             try {
                 Helper.checkClientAccountIdSize(inputClientAccountId);
             } catch (WrongFieldException wfe) {
