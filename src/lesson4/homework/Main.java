@@ -27,7 +27,8 @@ import java.util.Scanner;
 Обрабатывать ошибку не надо, в случае ошибки программа просто должна падать с ранее созданной ошибкой UserExpectedError.
 После вызова уведомить об успешном переводе средств.*/
 public class Main {
-    public static final Scanner SC = new Scanner(System.in);
+    private static final Scanner SC = new Scanner(System.in);
+    private static final Helper HELPER = new Helper(); // сделал отдельным полем как и сканер, чтобы не передавать каждый раз в метод;
 
     public static void main(String[] args) throws WrongFieldException {
 //        6.1
@@ -47,7 +48,8 @@ public class Main {
 
 //        6.4
         Client clientSender = new Client("14", "clientSurname", inputSenderAccountId, sumOfTransaction);
-        TransactionService.moneyTransaction(clientSender, inputRecipientAccountId);
+        TransactionService transactionService = new TransactionService();
+        transactionService.moneyTransaction(clientSender, inputRecipientAccountId);
         System.out.println("Money transaction is successful!");
         SC.close();
     }
@@ -55,7 +57,7 @@ public class Main {
     private static Double checkTheSumOfTransaction(Double sumOfTransaction) {
         while (sumOfTransaction > Helper.getMaxSum()) {
             try {
-                Helper.checkTheSum(sumOfTransaction);
+                HELPER.checkTheSum(sumOfTransaction);
             } catch (WrongSumException e) {
                 e.printStackTrace(); // *Специально оставил два разных варианта как шпаргалку на будущее. Предыдущий вариант писал ручками, а тут автоматом сгенерировало чуть иначе, но вроде тоже самое (только другим цветом);
             }
@@ -68,7 +70,7 @@ public class Main {
     private static String checkAccountIdLength(String inputClientAccountId) {
         while (inputClientAccountId.length() != Helper.getMandatoryAccountIdLength()) {
             try {
-                Helper.checkClientAccountIdSize(inputClientAccountId);
+                HELPER.checkClientAccountIdSize(inputClientAccountId);
             } catch (WrongFieldException wfe) {
                 System.out.println(wfe);
                 System.out.println(Arrays.toString(wfe.getStackTrace())); // .getStackTrace() - отображает более глубинно и подробно откуда вылазит ошибка;
