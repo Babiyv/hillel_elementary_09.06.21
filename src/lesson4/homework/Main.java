@@ -27,55 +27,56 @@ import java.util.Scanner;
 Обрабатывать ошибку не надо, в случае ошибки программа просто должна падать с ранее созданной ошибкой UserExpectedError.
 После вызова уведомить об успешном переводе средств.*/
 public class Main {
-    public static void main(String[] args) throws WrongFieldException {
-        Scanner sc = new Scanner(System.in);
+    private static final Scanner SC = new Scanner(System.in);
+    private static final Helper HELPER = new Helper(); // сделал отдельным полем как и сканер, чтобы не передавать каждый раз в метод;
 
+    public static void main(String[] args) throws WrongFieldException {
 //        6.1
         System.out.print("Please enter your account ID: ");
-        String inputSenderAccountId = sc.nextLine();
-        inputSenderAccountId = checkAccountIdLength(inputSenderAccountId, sc); // *вынес отдельным методом, чтобы не дублировать код в 6.2
+        String inputSenderAccountId = SC.nextLine();
+        inputSenderAccountId = checkAccountIdLength(inputSenderAccountId); // *вынес отдельным методом, чтобы не дублировать код в 6.2
 
 //        6.2
         System.out.print("Please enter recipient account ID: ");
-        String inputRecipientAccountId = sc.nextLine();
-        inputRecipientAccountId = checkAccountIdLength(inputRecipientAccountId, sc);
+        String inputRecipientAccountId = SC.nextLine();
+        inputRecipientAccountId = checkAccountIdLength(inputRecipientAccountId);
 
 //        6.3
         System.out.print("Sum of transaction: ");
-        Double sumOfTransaction = sc.nextDouble();
-        sumOfTransaction = checkTheSumOfTransaction(sumOfTransaction, sc); // *хоть и не дублируется, но вынес отдельным методом, потому что помню как говорили на паре о том, что код удобнее читать и фиксить когда он разбит на методы;
+        Double sumOfTransaction = SC.nextDouble();
+        sumOfTransaction = checkTheSumOfTransaction(sumOfTransaction); // *хоть и не дублируется, но вынес отдельным методом, потому что помню как говорили на паре о том, что код удобнее читать и фиксить когда он разбит на методы;
 
 //        6.4
         Client clientSender = new Client("14", "clientSurname", inputSenderAccountId, sumOfTransaction);
-        TransactionService.moneyTransaction(clientSender, inputRecipientAccountId);
+        TransactionService transactionService = new TransactionService();
+        transactionService.moneyTransaction(clientSender, inputRecipientAccountId);
         System.out.println("Money transaction is successful!");
-        sc.close();
-
+        SC.close();
     }
 
-    private static Double checkTheSumOfTransaction(Double sumOfTransaction, Scanner sc) {
+    private static Double checkTheSumOfTransaction(Double sumOfTransaction) {
         while (sumOfTransaction > Helper.getMaxSum()) {
             try {
-                Helper.checkTheSum(sumOfTransaction);
+                HELPER.checkTheSum(sumOfTransaction);
             } catch (WrongSumException e) {
                 e.printStackTrace(); // *Специально оставил два разных варианта как шпаргалку на будущее. Предыдущий вариант писал ручками, а тут автоматом сгенерировало чуть иначе, но вроде тоже самое (только другим цветом);
             }
             System.out.print("Sorry, but you can`t send more than 1000. \nPlease enter sum less than 1000: ");
-            sumOfTransaction = sc.nextDouble();
+            sumOfTransaction = SC.nextDouble();
         }
         return sumOfTransaction;
     }
 
-    private static String checkAccountIdLength(String inputClientAccountId, Scanner sc) throws WrongFieldException {
+    private static String checkAccountIdLength(String inputClientAccountId) {
         while (inputClientAccountId.length() != Helper.getMandatoryAccountIdLength()) {
             try {
-                Helper.checkClientAccountIdSize(inputClientAccountId);
+                HELPER.checkClientAccountIdSize(inputClientAccountId);
             } catch (WrongFieldException wfe) {
                 System.out.println(wfe);
                 System.out.println(Arrays.toString(wfe.getStackTrace())); // .getStackTrace() - отображает более глубинно и подробно откуда вылазит ошибка;
             }
             System.out.print("Please enter correct your account ID. It must contain 10 symbols: ");
-            inputClientAccountId = sc.nextLine();
+            inputClientAccountId = SC.nextLine();
         }
         return inputClientAccountId;
     }

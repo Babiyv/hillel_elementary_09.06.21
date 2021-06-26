@@ -26,21 +26,21 @@ public class Helper {
     }
 
     //    4.1:
-    public static void checkClientAccountIdSize(String clientAccountId) throws WrongFieldException {
+    public void checkClientAccountIdSize(String clientAccountId) throws WrongFieldException {
         if (clientAccountId.length() != MANDATORY_ACCOUNT_ID_LENGTH) {
             throw new WrongFieldException();
         }
     }
 
     //    4.2:
-    public static void checkTheSum(Double sum) throws WrongSumException { // добавил бы еще чтобы принимал сумму ограничения, чтобы если она менялась (например законодательно), то можно было бы это легко править в самой программе;
+    public void checkTheSum(Double sum) throws WrongSumException { // добавил бы еще чтобы принимал сумму ограничения, чтобы если она менялась (например законодательно), то можно было бы это легко править в самой программе;
         if (sum > MAX_SUM) {
             throw new WrongSumException();
         }
     }
 
     //    4.3:
-    public static void checkTransactionClientsAccountsId(String senderClientAccountId, String recipientClientAccountId) {
+    public void checkTransactionClientsAccountsId(String senderClientAccountId, String recipientClientAccountId) {
         if (senderClientAccountId.equals(recipientClientAccountId)) {
             throw new UserExpectedError();
         }
