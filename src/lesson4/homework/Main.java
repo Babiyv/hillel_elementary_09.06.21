@@ -55,28 +55,34 @@ public class Main {
     }
 
     private static Double checkTheSumOfTransaction(Double sumOfTransaction) {
-        while (sumOfTransaction > Helper.getMaxSum()) {
+        boolean notValid = true;
+        while (notValid) {
             try {
+                notValid = false;
                 HELPER.checkTheSum(sumOfTransaction);
             } catch (WrongSumException e) {
+                notValid = true;
                 e.printStackTrace(); // *Специально оставил два разных варианта как шпаргалку на будущее. Предыдущий вариант писал ручками, а тут автоматом сгенерировало чуть иначе, но вроде тоже самое (только другим цветом);
+                System.out.print("Sorry, but you can`t send more than 1000. \nPlease enter sum less than 1000: ");
+                sumOfTransaction = SC.nextDouble();
             }
-            System.out.print("Sorry, but you can`t send more than 1000. \nPlease enter sum less than 1000: ");
-            sumOfTransaction = SC.nextDouble();
         }
         return sumOfTransaction;
     }
 
     private static String checkAccountIdLength(String inputClientAccountId) {
-        while (inputClientAccountId.length() != Helper.getMandatoryAccountIdLength()) {
+        boolean notValid = true;
+        while (notValid) {
             try {
+                notValid = false;
                 HELPER.checkClientAccountIdSize(inputClientAccountId);
             } catch (WrongFieldException wfe) {
+                notValid = true;
                 System.out.println(wfe);
                 System.out.println(Arrays.toString(wfe.getStackTrace())); // .getStackTrace() - отображает более глубинно и подробно откуда вылазит ошибка;
+                System.out.print("Please enter correct your account ID. It must contain 10 symbols: ");
+                inputClientAccountId = SC.nextLine();
             }
-            System.out.print("Please enter correct your account ID. It must contain 10 symbols: ");
-            inputClientAccountId = SC.nextLine();
         }
         return inputClientAccountId;
     }
