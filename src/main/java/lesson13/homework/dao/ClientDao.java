@@ -1,8 +1,8 @@
 package lesson13.homework.dao;
 
 import lesson12.database.Database;
-import lesson13.homework.entity.Account;
 import lesson13.homework.entity.Client;
+import lesson13.homework.entity.ClientStatus;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -18,6 +18,8 @@ public class ClientDao {
     private static final String DELETE_CLIENT = "DELETE FROM clients WHERE id=?";
     private static final String CLIENT_BY_PHONE = "SELECT * FROM clients WHERE phone=?";
     private static final String CLIENTS_BY_ACCOUNTS = "SELECT * FROM clients INNER JOIN accounts ON clients.id = accounts.client_id";
+    private static final String CLIENTS_NAME_EMAIL_ALIAS = "SELECT name, email, alias FROM client_status AS cs " +
+                    "JOIN clients AS c ON cs.client_id = c.id JOIN statuses AS s ON cs.status_id = s.id WHERE age>18";
 
     //     сохранение "сущности":
     public void save (Client client) {
@@ -124,5 +126,24 @@ public class ClientDao {
         return resultList;
     }
 
-
+/*        7. Добавить запрос для получения значений clients.name, clients.email, statuses.alias
+        из таблицы клиентов(Clients) и из таблицы статусов(Statuses) используя join 3х таблиц и где возраст пользователей старше 18 лет.
+        (Если возраста нет, надо что-то сделать чтобы был)*/
+    public List<ClientStatus> getClientsNameEmailAlias() {
+        List<ClientStatus> resultList = new ArrayList<>();
+        try (Connection connection = Database.getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(CLIENTS_NAME_EMAIL_ALIAS)) {
+            while (resultSet.next()) {
+                ClientStatus clientStatus = new ClientStatus();
+                clientStatus.setName(resultSet.getString("name"));
+                clientStatus.setEmail(resultSet.getString("email"));
+                clientStatus.setAlias(resultSet.getString("alias"));
+                resultList.add(clientStatus);
+            }
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+        return resultList;
+    }
 }
