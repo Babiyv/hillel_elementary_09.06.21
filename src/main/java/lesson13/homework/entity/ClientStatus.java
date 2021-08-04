@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class ClientStatus {
-    private int clientId;
-    private int statusId;
+    private String name;
+    private String email;
+    private String alias;
 }
