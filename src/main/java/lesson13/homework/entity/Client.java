@@ -7,6 +7,6 @@ public class Client {
     private int id;
     private String name;
     private String email;
-    private int phone;
+    private long phone;
     private String about;
 }

@@ -1,6 +1,7 @@
 package lesson13.homework.dao;
 
 import lesson12.database.Database;
+import lesson13.homework.entity.Account;
 import lesson13.homework.entity.Client;
 
 import java.sql.*;
@@ -15,6 +16,7 @@ public class ClientDao {
     private static final String UPDATE = "UPDATE clients SET name=?, email=?, phone=?, about=? WHERE id=?";
     private static final String CLIENTS = "SELECT * FROM clients";
     private static final String DELETE_CLIENT = "DELETE FROM clients WHERE id=?";
+    private static final String CLIENT_BY_PHONE = "SELECT * FROM clients WHERE phone=?";
 
     //     сохранение "сущности":
     public void save (Client client) {
@@ -22,7 +24,7 @@ public class ClientDao {
              PreparedStatement prepStatement = connection.prepareStatement(INSERT_CLIENT)) { // PreparedStatement - интерфейс можно передать параметр, в отличии от стейтмент обычного
             prepStatement.setString(1, client.getName());
             prepStatement.setString(2, client.getEmail());
-            prepStatement.setInt(3, client.getPhone());
+            prepStatement.setLong(3, client.getPhone());
             prepStatement.setString(4, client.getAbout());
         } catch (SQLException exception) {
             exception.printStackTrace();
@@ -35,7 +37,7 @@ public class ClientDao {
              PreparedStatement prepStatement = connection.prepareStatement(UPDATE)) {
             prepStatement.setString(1, client.getName());
             prepStatement.setString(2, client.getEmail());
-            prepStatement.setInt(3, client.getPhone());
+            prepStatement.setLong(3, client.getPhone());
             prepStatement.setString(4, client.getAbout());
             prepStatement.setInt(5, client.getId());
             prepStatement.execute(); // - команда выполнить;
@@ -55,7 +57,7 @@ public class ClientDao {
                 client.setId(resultSet.getInt("id"));
                 client.setName(resultSet.getString("name"));
                 client.setEmail(resultSet.getString("email"));
-                client.setPhone(resultSet.getInt("phone"));
+                client.setPhone(resultSet.getLong("phone"));
                 client.setAbout(resultSet.getString("about"));
                 resultList.add(client);
             }
