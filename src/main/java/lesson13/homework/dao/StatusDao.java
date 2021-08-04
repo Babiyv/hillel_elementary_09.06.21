@@ -21,6 +21,7 @@ public class StatusDao {
              PreparedStatement prepStatement = connection.prepareStatement(INSERT_STATUS)) {
             prepStatement.setString(1, status.getAlias());
             prepStatement.setString(2, status.getDescription());
+            prepStatement.execute();
         } catch (SQLException exception) {
             exception.printStackTrace();
         }

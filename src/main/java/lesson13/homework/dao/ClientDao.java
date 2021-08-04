@@ -42,6 +42,7 @@ public class ClientDao {
             prepStatement.setLong(3, client.getPhone());
             prepStatement.setString(4, client.getAbout());
             prepStatement.setInt(5, client.getAge());
+            prepStatement.execute();
         } catch (SQLException exception) {
             exception.printStackTrace();
         }

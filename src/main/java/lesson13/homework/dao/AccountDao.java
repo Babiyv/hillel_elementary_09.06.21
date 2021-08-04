@@ -25,6 +25,7 @@ public class AccountDao {
                 prepStatement.setInt(1, account.getClientId());
                 prepStatement.setString(2, account.getNumber());
                 prepStatement.setDouble(3, account.getValue());
+                prepStatement.execute();
             } catch (SQLException exception) {
                 exception.printStackTrace();
             }

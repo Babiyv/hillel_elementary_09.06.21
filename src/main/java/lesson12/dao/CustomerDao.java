@@ -79,6 +79,7 @@ public class CustomerDao {
             prepStatement.setString(3, customer.getEmail());
             prepStatement.setInt(4, customer.getAge());
             prepStatement.setString(5, customer.getPassword());
+            prepStatement.execute();
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
