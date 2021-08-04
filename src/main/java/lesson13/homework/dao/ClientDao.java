@@ -1,7 +1,6 @@
 package lesson13.homework.dao;
 
 import lesson12.database.Database;
-import lesson13.homework.entity.Account;
 import lesson13.homework.entity.Client;
 
 import java.sql.*;
