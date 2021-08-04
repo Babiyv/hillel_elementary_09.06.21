@@ -22,7 +22,7 @@ public class AccountDao {
     public void save (Account account) {
             try (Connection connection = Database.getConnection();
                  PreparedStatement prepStatement = connection.prepareStatement(INSERT_ACCOUNT)) { // PreparedStatement - интерфейс можно передать параметр, в отличии от стейтмент обычного
-                prepStatement.setInt(1, account.getClient_id());
+                prepStatement.setInt(1, account.getClientId());
                 prepStatement.setString(2, account.getNumber());
                 prepStatement.setDouble(3, account.getValue());
             } catch (SQLException exception) {
@@ -34,7 +34,7 @@ public class AccountDao {
     public void update(Account account) {
             try (Connection connection = Database.getConnection();
                  PreparedStatement prepStatement = connection.prepareStatement(UPDATE)) {
-                prepStatement.setInt(1, account.getClient_id());
+                prepStatement.setInt(1, account.getClientId());
                 prepStatement.setString(2, account.getNumber());
                 prepStatement.setDouble(3, account.getValue());
                 prepStatement.setInt(4, account.getId());
@@ -53,7 +53,7 @@ public class AccountDao {
                 while (resultSet.next()) { // .next - если есть следующее значение, то "тру"
                     Account account = new Account();
                     account.setId(resultSet.getInt("id"));
-                    account.setClient_id(resultSet.getInt("client_id"));
+                    account.setClientId(resultSet.getInt("client_id"));
                     account.setNumber(resultSet.getString("number"));
                     account.setValue(resultSet.getDouble("value"));
                     resultList.add(account);
@@ -101,7 +101,7 @@ public class AccountDao {
                 while (resultSet.next()) {
                     Account account = new Account();
                     account.setId(resultSet.getInt("id"));
-                    account.setClient_id(resultSet.getInt("client_id"));
+                    account.setClientId(resultSet.getInt("client_id"));
                     account.setNumber(resultSet.getString("number"));
                     account.setValue(resultSet.getDouble("value"));
                     return account;
