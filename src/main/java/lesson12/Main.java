@@ -21,7 +21,15 @@ public class Main {
         customer.setName("NAME");
         customer.setSurname("SURNAME");
         customer.setEmail("qrq@mail.com");
-        customer.setAge(4);
         customer.setPassword("geg");
+        customer.setAge(4);
+
+        customerDao.save(customer);
+
+        customerDao.delete(5);
+        System.out.println("deleted");
+/*        for (Customer customer : customerDao.findAllCustomers()) {
+            System.out.println(customer);
+        }*/
     }
 }
