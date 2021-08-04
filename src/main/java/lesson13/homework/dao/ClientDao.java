@@ -21,6 +21,17 @@ public class ClientDao {
     private static final String CLIENTS_NAME_EMAIL_ALIAS = "SELECT name, email, alias FROM client_status AS cs " +
                     "JOIN clients AS c ON cs.client_id = c.id JOIN statuses AS s ON cs.status_id = s.id WHERE age>18";
 
+    //    метод добавленные для избежания дублированивания кода (даже сама идея ругалась):
+    public Client generateClient(ResultSet resultSet) throws SQLException {
+        Client client = new Client();
+        client.setId(resultSet.getInt("id"));
+        client.setName(resultSet.getString("name"));
+        client.setEmail(resultSet.getString("email"));
+        client.setPhone(resultSet.getLong("phone"));
+        client.setAbout(resultSet.getString("about"));
+        return client;
+    }
+
     //     сохранение "сущности":
     public void save (Client client) {
         try (Connection connection = Database.getConnection();
@@ -56,14 +67,7 @@ public class ClientDao {
              Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(CLIENTS);
             while (resultSet.next()) {
-//  TODO: убрать/исправить дубль кода ниже:
-                Client client = new Client();
-                client.setId(resultSet.getInt("id"));
-                client.setName(resultSet.getString("name"));
-                client.setEmail(resultSet.getString("email"));
-                client.setPhone(resultSet.getLong("phone"));
-                client.setAbout(resultSet.getString("about"));
-                resultList.add(client);
+                resultList.add(generateClient(resultSet));
             }
         } catch (SQLException exception) {
             exception.printStackTrace();
@@ -89,14 +93,7 @@ public class ClientDao {
             prepStatement.setLong(1, phoneNumber);
             ResultSet resultSet = prepStatement.executeQuery();
             while (resultSet.next()) {
-//  TODO: убрать/исправить дубль кода ниже:
-                Client client = new Client();
-                client.setId(resultSet.getInt("id"));
-                client.setName(resultSet.getString("name"));
-                client.setEmail(resultSet.getString("email"));
-                client.setPhone(resultSet.getLong("phone"));
-                client.setAbout(resultSet.getString("about"));
-                return client;
+                return generateClient(resultSet);
             }
         } catch (SQLException exception) {
             exception.printStackTrace();
@@ -111,14 +108,7 @@ public class ClientDao {
              Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(CLIENTS_BY_ACCOUNTS);
             while (resultSet.next()) {
-//  TODO: убрать/исправить дубль кода ниже:
-                Client client = new Client();
-                client.setId(resultSet.getInt("id"));
-                client.setName(resultSet.getString("name"));
-                client.setEmail(resultSet.getString("email"));
-                client.setPhone(resultSet.getLong("phone"));
-                client.setAbout(resultSet.getString("about"));
-                resultList.add(client);
+                resultList.add(generateClient(resultSet));
             }
         } catch (SQLException exception) {
             exception.printStackTrace();
