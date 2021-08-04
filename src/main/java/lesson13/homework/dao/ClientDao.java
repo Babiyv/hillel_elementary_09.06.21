@@ -77,4 +77,25 @@ public class ClientDao {
             exception.printStackTrace();
         }
     }
+
+    //    4. Добавить метод для поиска Client по номеру телефона в соответствующий dao;
+    public Client findByPhoneNumber(Long phoneNumber) {
+        try (Connection connection = Database.getConnection();
+             PreparedStatement prepStatement = connection.prepareStatement(CLIENT_BY_PHONE)) {
+            prepStatement.setLong(1, phoneNumber);
+            ResultSet resultSet = prepStatement.executeQuery();
+            while (resultSet.next()) {
+                Client client = new Client();
+                client.setId(resultSet.getInt("id"));
+                client.setName(resultSet.getString("name"));
+                client.setEmail(resultSet.getString("email"));
+                client.setPhone(resultSet.getLong("phone"));
+                client.setAbout(resultSet.getString("about"));
+                return client;
+            }
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+        return null;
+    }
 }
