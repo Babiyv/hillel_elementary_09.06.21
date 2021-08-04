@@ -1,9 +1,7 @@
 package lesson13.homework.dao;
 
 import lesson12.database.Database;
-import lesson12.entity.Customer;
 import lesson13.homework.entity.Account;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +9,7 @@ import java.util.List;
 /*2. Создать сервисы для своих сущностей: ClientDao, StatusDao, AccountDao, у каждого из которых
 реализовать CRUD методы для полного сохранения/обновления/получения списка/удаления сущностей соответствующих;*/
 public class AccountDao {
-    // dao - data access object (название с точки зрения паттерна проектирования);
+    // dao (data access object) - общее название с точки зрения паттерна проектирования для сервисов взаимодействия с сущностями из баз данных;
     public class CustomerDao {
         private static final String INSERT_ACCOUNT = "INSERT INTO accounts (client_id, number, value) VALUES (?, ?, ?)";
         private static final String UPDATE = "UPDATE accounts SET client_id=?, number=?, value=? WHERE id=?";
