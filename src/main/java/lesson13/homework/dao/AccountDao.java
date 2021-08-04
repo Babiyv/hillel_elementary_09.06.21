@@ -10,15 +10,14 @@ import java.util.List;
 реализовать CRUD методы для полного сохранения/обновления/получения списка/удаления сущностей соответствующих;*/
 public class AccountDao {
     // dao (data access object) - общее название с точки зрения паттерна проектирования для сервисов взаимодействия с сущностями из баз данных;
-    public class CustomerDao {
-        private static final String INSERT_ACCOUNT = "INSERT INTO accounts (client_id, number, value) VALUES (?, ?, ?)";
-        private static final String UPDATE = "UPDATE accounts SET client_id=?, number=?, value=? WHERE id=?";
-        private static final String ACCOUNTS = "SELECT * FROM accounts";
-        private static final String DELETE_ACCOUNT = "DELETE FROM accounts WHERE id=?";
-        private static final String ACCOUNT_BY_ID = "SELECT * FROM accounts WHERE id=?";
+     private static final String INSERT_ACCOUNT = "INSERT INTO accounts (client_id, number, value) VALUES (?, ?, ?)";
+     private static final String UPDATE = "UPDATE accounts SET client_id=?, number=?, value=? WHERE id=?";
+     private static final String ACCOUNTS = "SELECT * FROM accounts";
+     private static final String DELETE_ACCOUNT = "DELETE FROM accounts WHERE id=?";
+     private static final String ACCOUNT_BY_ID = "SELECT * FROM accounts WHERE id=?";
 
-//        сохранение "сущности":
-        public void save (Account account) {
+//     сохранение "сущности":
+    public void save (Account account) {
             try (Connection connection = Database.getConnection();
                  PreparedStatement prepStatement = connection.prepareStatement(INSERT_ACCOUNT)) { // PreparedStatement - интерфейс можно передать параметр, в отличии от стейтмент обычного
                 prepStatement.setInt(1, account.getClient_id());
@@ -29,8 +28,8 @@ public class AccountDao {
             }
         }
 
-//        обновление "сущности":
-        public void update(Account account) {
+//     обновление "сущности":
+    public void update(Account account) {
             try (Connection connection = Database.getConnection();
                  PreparedStatement statement = connection.prepareStatement(UPDATE)) {
                 statement.setInt(1, account.getClient_id());
@@ -43,8 +42,8 @@ public class AccountDao {
             }
         }
 
-//        получение списка "сущностей":
-        public List<Account> getAllAccounts() {
+//     получение списка "сущностей":
+    public List<Account> getAllAccounts() {
             List<Account> resultList = new ArrayList<>();
             // вариант написания "try with resources":
             try (Connection connection = Database.getConnection(); Statement statement = connection.createStatement()) {
@@ -63,8 +62,8 @@ public class AccountDao {
             return resultList;
         }
 
-//        удаление "сущности":
-        public void delete(Integer id) {
+//     удаление "сущности":
+    public void delete(Integer id) {
             try (Connection connection = Database.getConnection();
                  PreparedStatement statement = connection.prepareStatement(DELETE_ACCOUNT)) {
                 statement.setInt(1, id);
@@ -74,8 +73,8 @@ public class AccountDao {
             }
         }
 
-//        получение конкретной "сущности" из таблицы (по заданию не нужно, просто оставил):
-        public Account getById(Integer id) {
+//     получение конкретной "сущности" из таблицы (по заданию не нужно, просто оставил):
+    public Account getById(Integer id) {
             try (Connection connection = Database.getConnection();
                  PreparedStatement statement = connection.prepareStatement(ACCOUNT_BY_ID)) {
                 statement.setInt(1, id);
@@ -93,5 +92,4 @@ public class AccountDao {
             }
             return null;
         }
-    }
 }
