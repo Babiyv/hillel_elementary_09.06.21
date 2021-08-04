@@ -31,12 +31,12 @@ public class AccountDao {
 //     обновление "сущности":
     public void update(Account account) {
             try (Connection connection = Database.getConnection();
-                 PreparedStatement statement = connection.prepareStatement(UPDATE)) {
-                statement.setInt(1, account.getClient_id());
-                statement.setString(2, account.getNumber());
-                statement.setDouble(3, account.getValue());
-                statement.setInt(4, account.getId());
-                statement.execute(); // - команда выполнить;
+                 PreparedStatement prepStatement = connection.prepareStatement(UPDATE)) {
+                prepStatement.setInt(1, account.getClient_id());
+                prepStatement.setString(2, account.getNumber());
+                prepStatement.setDouble(3, account.getValue());
+                prepStatement.setInt(4, account.getId());
+                prepStatement.execute(); // - команда выполнить;
             } catch (SQLException exception) {
                 exception.printStackTrace();
             }
@@ -65,9 +65,9 @@ public class AccountDao {
 //     удаление "сущности":
     public void delete(Integer id) {
             try (Connection connection = Database.getConnection();
-                 PreparedStatement statement = connection.prepareStatement(DELETE_ACCOUNT)) {
-                statement.setInt(1, id);
-                statement.execute();
+                 PreparedStatement prepStatement = connection.prepareStatement(DELETE_ACCOUNT)) {
+                prepStatement.setInt(1, id);
+                prepStatement.execute();
             } catch (SQLException exception) {
                 exception.printStackTrace();
             }
@@ -76,9 +76,9 @@ public class AccountDao {
 //     получение конкретной "сущности" из таблицы (по заданию не нужно, просто оставил):
     public Account getById(Integer id) {
             try (Connection connection = Database.getConnection();
-                 PreparedStatement statement = connection.prepareStatement(ACCOUNT_BY_ID)) {
-                statement.setInt(1, id);
-                ResultSet resultSet = statement.executeQuery();
+                 PreparedStatement prepStatement = connection.prepareStatement(ACCOUNT_BY_ID)) {
+                prepStatement.setInt(1, id);
+                ResultSet resultSet = prepStatement.executeQuery();
                 while (resultSet.next()) {
                     Account account = new Account();
                     account.setId(resultSet.getInt("id"));
