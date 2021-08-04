@@ -2,6 +2,7 @@ package lesson13.homework.dao;
 
 import lesson12.database.Database;
 import lesson13.homework.entity.Account;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ public class AccountDao {
      private static final String ACCOUNTS = "SELECT * FROM accounts";
      private static final String DELETE_ACCOUNT = "DELETE FROM accounts WHERE id=?";
      private static final String ACCOUNT_BY_ID = "SELECT * FROM accounts WHERE id=?";
+     private static final String ACCOUNT_BY_VALUE = "SELECT number FROM accounts WHERE value>?";
 
 //     сохранение "сущности":
     public void save (Account account) {
@@ -73,7 +75,24 @@ public class AccountDao {
             }
         }
 
-//     получение конкретной "сущности" из таблицы (по заданию не нужно, просто оставил):
+//     5. Добавить метод для получения number из Account, где value > переданного значения;
+    public List<String> findNumberByValue(Double minValue) {
+        List<String> resultList = new ArrayList<>();
+        try (Connection connection = Database.getConnection();
+             PreparedStatement prepStatement = connection.prepareStatement(ACCOUNT_BY_VALUE)) {
+            prepStatement.setDouble(1, minValue);
+            ResultSet resultSet = prepStatement.executeQuery();
+            while (resultSet.next()) {
+                resultList.add(resultSet.getString("number"));
+            }
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+        return resultList;
+    }
+
+
+//     получение конкретной "сущности" из таблицы (по заданию не нужно, просто оставил на заметку):
     public Account getById(Integer id) {
             try (Connection connection = Database.getConnection();
                  PreparedStatement prepStatement = connection.prepareStatement(ACCOUNT_BY_ID)) {
