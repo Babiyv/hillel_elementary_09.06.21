@@ -1,6 +1,6 @@
 package lesson13.homework.dao;
 
-import lesson12.database.Database;
+import lesson13.homework.database.Database;
 import lesson13.homework.entity.Client;
 import lesson13.homework.entity.ClientStatus;
 
@@ -20,9 +20,10 @@ public class ClientDao {
     private static final String CLIENTS_BY_ACCOUNTS = "SELECT * FROM clients INNER JOIN accounts ON clients.id = accounts.client_id";
     private static final String CLIENTS_NAME_EMAIL_ALIAS = "SELECT name, email, alias FROM client_status AS cs " +
                     "JOIN clients AS c ON cs.client_id = c.id JOIN statuses AS s ON cs.status_id = s.id WHERE age>18";
+    private static final String CLIENT_BY_ID = "SELECT * FROM clients WHERE id=?";
 
     //    метод добавленные для избежания дублированивания кода (даже сама идея ругалась):
-    public Client generateClient(ResultSet resultSet) throws SQLException {
+    private Client generateClient(ResultSet resultSet) throws SQLException {
         Client client = new Client();
         client.setId(resultSet.getInt("id"));
         client.setName(resultSet.getString("name"));
@@ -137,5 +138,20 @@ public class ClientDao {
             exception.printStackTrace();
         }
         return resultList;
+    }
+
+    //    в задании не было, но добавил для более удобного обновления и пр. с уже существующим конкретным клиентом:
+    public Client getById(Integer id) {
+        try (Connection connection = Database.getConnection();
+             PreparedStatement prepStatement = connection.prepareStatement(CLIENT_BY_ID)) {
+            prepStatement.setInt(1, id);
+            ResultSet resultSet = prepStatement.executeQuery();
+            while (resultSet.next()) {
+                generateClient(resultSet);
+            }
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+        return null;
     }
 }
