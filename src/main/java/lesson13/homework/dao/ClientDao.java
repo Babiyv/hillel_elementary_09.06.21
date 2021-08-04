@@ -12,8 +12,8 @@ import java.util.List;
 реализовать CRUD методы для полного сохранения/обновления/получения списка/удаления сущностей соответствующих;*/
 public class ClientDao {
     // dao (data access object) - общее название с точки зрения паттерна проектирования для сервисов взаимодействия с сущностями из баз данных;
-    private static final String INSERT_CLIENT = "INSERT INTO clients (name, email, phone, about) VALUES (?, ?, ?, ?)";
-    private static final String UPDATE = "UPDATE clients SET name=?, email=?, phone=?, about=? WHERE id=?";
+    private static final String INSERT_CLIENT = "INSERT INTO clients (name, email, phone, about, age) VALUES (?, ?, ?, ?, ?)";
+    private static final String UPDATE = "UPDATE clients SET name=?, email=?, phone=?, about=?, age=? WHERE id=?";
     private static final String CLIENTS = "SELECT * FROM clients";
     private static final String DELETE_CLIENT = "DELETE FROM clients WHERE id=?";
     private static final String CLIENT_BY_PHONE = "SELECT * FROM clients WHERE phone=?";
@@ -40,6 +40,7 @@ public class ClientDao {
             prepStatement.setString(2, client.getEmail());
             prepStatement.setLong(3, client.getPhone());
             prepStatement.setString(4, client.getAbout());
+            prepStatement.setInt(5, client.getAge());
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
@@ -53,7 +54,8 @@ public class ClientDao {
             prepStatement.setString(2, client.getEmail());
             prepStatement.setLong(3, client.getPhone());
             prepStatement.setString(4, client.getAbout());
-            prepStatement.setInt(5, client.getId());
+            prepStatement.setInt(5, client.getAge());
+            prepStatement.setInt(6, client.getId());
             prepStatement.execute(); // - команда выполнить;
         } catch (SQLException exception) {
             exception.printStackTrace();
