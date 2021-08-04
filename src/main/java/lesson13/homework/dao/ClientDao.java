@@ -17,6 +17,7 @@ public class ClientDao {
     private static final String CLIENTS = "SELECT * FROM clients";
     private static final String DELETE_CLIENT = "DELETE FROM clients WHERE id=?";
     private static final String CLIENT_BY_PHONE = "SELECT * FROM clients WHERE phone=?";
+    private static final String CLIENTS_BY_ACCOUNTS = "SELECT * FROM clients INNER JOIN accounts ON clients.id = accounts.client_id";
 
     //     сохранение "сущности":
     public void save (Client client) {
@@ -53,6 +54,7 @@ public class ClientDao {
              Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(CLIENTS);
             while (resultSet.next()) {
+//  TODO: убрать/исправить дубль кода ниже:
                 Client client = new Client();
                 client.setId(resultSet.getInt("id"));
                 client.setName(resultSet.getString("name"));
@@ -85,6 +87,7 @@ public class ClientDao {
             prepStatement.setLong(1, phoneNumber);
             ResultSet resultSet = prepStatement.executeQuery();
             while (resultSet.next()) {
+//  TODO: убрать/исправить дубль кода ниже:
                 Client client = new Client();
                 client.setId(resultSet.getInt("id"));
                 client.setName(resultSet.getString("name"));
@@ -98,4 +101,28 @@ public class ClientDao {
         }
         return null;
     }
+
+    //    6. Добавить метод для получения всех Clients где id клиент = client_id таблицы сущности Accounts;
+    public List<Client> getAllClientsWhereIdEqualsAccountsClientId() {
+        List<Client> resultList = new ArrayList<>();
+        try (Connection connection = Database.getConnection();
+             Statement statement = connection.createStatement()) {
+            ResultSet resultSet = statement.executeQuery(CLIENTS_BY_ACCOUNTS);
+            while (resultSet.next()) {
+//  TODO: убрать/исправить дубль кода ниже:
+                Client client = new Client();
+                client.setId(resultSet.getInt("id"));
+                client.setName(resultSet.getString("name"));
+                client.setEmail(resultSet.getString("email"));
+                client.setPhone(resultSet.getLong("phone"));
+                client.setAbout(resultSet.getString("about"));
+                resultList.add(client);
+            }
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+        return resultList;
+    }
+
+
 }
