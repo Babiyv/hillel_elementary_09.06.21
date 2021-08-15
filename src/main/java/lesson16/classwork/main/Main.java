@@ -1,7 +1,7 @@
-package lesson16.main;
+package lesson16.classwork.main;
 
-import lesson16.intr.TestInterface;
-import lesson16.intr.TestInterfaceImpl;
+import lesson16.classwork.intr.TestInterface;
+import lesson16.classwork.intr.TestInterfaceImpl;
 
 import java.util.Optional;
 
@@ -51,30 +51,47 @@ public class Main {
             System.out.println(result2.get());
         }
 //        ...равноценно вот этому:
-//        ifPresent:
-        result2.ifPresent(System.out::println);*/
+//        ifPresent:result2.ifPresent(System.out::println);*/
 
 
+//         Анонимный класс сразу создали класс и его объект, и там же написали реализацию его метода (например если нам нужно использовать его только в одном месте):
+/*        MyFunctIntr myFunctIntr = new MyFunctIntr() { // условно говоря создали класс и тут же
+            @Override
+            public int run(String first, String second) {
+                System.out.println(first + second);
+                return first.length() + second.length();
+            }
+        };*/
+//        Лямба-выражение как аналог записи выше (создание анонимного класса):
+//        MyFunctIntr myFunctIntrWithLambda = (a, b) -> a.length() + b.length();
+
+//        Пример лямба выражений №2:
+//        MyFunctIntr myFunctIntrWithLambda1 = (a, b) -> concat(a,b);
+        // обычная запись (аналогичная верхней по сути):
+/*        System.out.println(myFunctIntr1.run("asdas", "asdasd"));
+        myFunctIntrWithLambda1.run("asdas", "asdasd");*/
+
+//        Пример лямба-выражения №3:
+        // обычная запись:
+/*        public int calculate (int a, int b) {
+            return a + b;
+        }*/
+        // лямбда-выражение:
+//        (a, b) -> (a + b); // вначале описываем параметры, а потом то, что мыс ними делаем. "->" - символ лямбда-выражения;
 
 
-//        MyFunctIntr myFunctIntr = new MyFunctIntr() {
-//            @Override
-//            public int run(String first, String second) {
-//                System.out.println(first + second);
-//                return first.length() + second.length();
-//            }
-//        };
-//
-//        MyFunctIntr myFunctIntrWithLambda = (a, b) -> concat(a,b);
-//
-//        System.out.println(myFunctIntr.run("asdas", "asdasd"));
-//        myFunctIntrWithLambda.run("asdas", "asdasd");
-//
+//        Предикат - функциональный интерфейс Predicate<T> проверяется соблюдение условия, если соблюдается, то возвращает true.
 //        Predicate<List> predicate = (first) -> first.isEmpty();
-//
 //        predicate.test(new ArrayList());
 
 
+//        Function<T, R> - принимает одно и трансформирует в другое ((R apply T t););
+//        Consumer<T> - принимает объект, потом может выполнить с ним какие-то действия, но ничего не возвращает;
+//        Supplier<T> - ничего не принимает, только возвращает (T get(););
+
+//        BiPredicate<T, U> - принимает два параметра (boolean test(T t, U u););
+//        BiConsumer<T, U> - void accept (T t, U u);
+//        BiFunction<T, U, R> - R apply(T t, U u);
     }
 
     private static int concat(String first, String second) {

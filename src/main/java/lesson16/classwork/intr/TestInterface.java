@@ -1,4 +1,4 @@
-package lesson16.intr;
+package lesson16.classwork.intr;
 
 // в Java ЗАПРЕЩЕННО множественное наследование КЛАССОВ, но с 8-ой Java РАЗРШЕНО множественное наследование ИНТЕРФЕЙСОВ (так как в ней появились дефоултные методы).
 public interface TestInterface {

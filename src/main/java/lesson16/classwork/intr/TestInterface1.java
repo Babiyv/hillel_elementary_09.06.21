@@ -1,4 +1,4 @@
-package lesson16.intr;
+package lesson16.classwork.intr;
 
 public interface TestInterface1 {
 //    создаем такой же дефоултный метод с таким же названием как и в TestInterface для примера множественного наследования:

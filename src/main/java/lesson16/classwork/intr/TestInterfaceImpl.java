@@ -1,4 +1,4 @@
-package lesson16.intr;
+package lesson16.classwork.intr;
 
 public class TestInterfaceImpl implements TestInterface, TestInterface1 {
 
