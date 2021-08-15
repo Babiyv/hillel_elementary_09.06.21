@@ -5,6 +5,7 @@ import lesson16.homework.utils.EmbeddedFunctionalInterfaces;
 import lesson16.homework.utils.Helper;
 
 import java.util.Optional;
+import java.util.function.Predicate;
 
 // 4. В классе Main реализовать вызов всех возможных вызовов;
 public class Main {
@@ -68,7 +69,13 @@ public class Main {
         // *** закоментировал после того как проверил, чтобы не мешало выполнять остальной код ***
 //        System.out.println(invalidEmail.get());  // - передаем null и получаем ошибку;
 
-        System.out.println(EmbeddedFunctionalInterfaces.predicate(1600.00));
+//        8. Используя функциональные интерфейсы написать следующие функции:
+//        8.1. Predicate: метод, который на вход принимает дробное значение зарплаты. Если это значение больше 1500.0, то возвращает значение true;
+        double salary = 1600.00;
+        Predicate<Double> isBiggerThan1500 = var -> var > 1500.00; // Предикат - функциональный интерфейс Predicate<T> проверяется соблюдение условия, если соблюдается, то возвращает true.
+        System.out.println(isBiggerThan1500.test(salary));
+
+        // остальные методы попробовал спрятать в отдельный класс, для лаконичности:
         EmbeddedFunctionalInterfaces.consumer("a1b2c3");
         System.out.println(EmbeddedFunctionalInterfaces.function(5));
         System.out.println(EmbeddedFunctionalInterfaces.supplier());
