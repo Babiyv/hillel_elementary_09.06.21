@@ -12,7 +12,7 @@ public class Main {
     public static void main(String[] args) {
 
 //         4. В классе Main реализовать вызов всех возможных вызовов;
-    // вызов статиков сразу напрямую:
+        // вызов статиков сразу напрямую:
         TestInterface1.staticMethodFromInterface1();
         TestInterface2.staticMethodFromInterface2();
         TestInterface3.staticMethodFromInterface3();
@@ -61,7 +61,7 @@ public class Main {
 
         Helper helper = new Helper();
 //        6. Вызвать в классе Main этот хелпер передав валидное значение и получить его;
-        Optional validEmail = helper.emailChecker("qee@gmail.com");
+        Optional<String> validEmail = helper.emailChecker("qee@gmail.com"); // *Яшин сказал, что нужно указывать опшионал с дженериком Optional<String>;
         System.out.println(validEmail.get()); // - соответсвует и возвращается Optional с этой строкой;
 
 //        7. Вызвать в классе Main этот хелпер передав не валидное значение и вызвать ошибку используя Optional функции;
@@ -72,18 +72,12 @@ public class Main {
 //        8. Используя функциональные интерфейсы написать следующие функции:
 //        8.1. Predicate: метод, который на вход принимает дробное значение зарплаты. Если это значение больше 1500.0, то возвращает значение true;
         double salary = 1600.00;
-        Predicate<Double> isBiggerThan1500 = var -> var > 1500.00; // Предикат - функциональный интерфейс Predicate<T> проверяется соблюдение условия, если соблюдается, то возвращает true.
+        Predicate<Double> isBiggerThan1500 = variable -> variable > 1500.00; // Предикат - функциональный интерфейс Predicate<T> проверяется соблюдение условия, если соблюдается, то возвращает true.
         System.out.println(isBiggerThan1500.test(salary));
 
         // остальные методы попробовал спрятать в отдельный класс, для лаконичности:
         EmbeddedFunctionalInterfaces.consumer("a1b2c3");
-        System.out.println(EmbeddedFunctionalInterfaces.function(5));
+        System.out.println("Function in case number to word: " + EmbeddedFunctionalInterfaces.function(5)); // *замечания Яшина;
         System.out.println(EmbeddedFunctionalInterfaces.supplier());
-
-
-
-
-
-
     }
 }
