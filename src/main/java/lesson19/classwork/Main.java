@@ -11,7 +11,7 @@ import sun.management.snmp.jvminstr.JvmOSImpl;
 import java.util.concurrent.FutureTask;
 
 public class Main {
-    static Integer TEST = 0;
+    static int TEST = 0;
     public static void main(String[] args) throws Exception {
         // варианты создания потоков:
 
