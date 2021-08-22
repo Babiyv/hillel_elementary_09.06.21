@@ -71,19 +71,20 @@ public class Main {
 //------------------------------------------------------------------------------------------
 
         // Методы для работы с потоками:
-/*        myThread.start(); // - запуск выполнения потока;
-        System.out.println(myThread.isAlive()); // - проверяет работает ли все еще поток, возвращает значение boolean;
-        System.exit(0); // - просто вышел с потока (не метод "потоков");
-        myThread.interrupt(); // - дать совет планировщику потоков завершить выбранный поток;
-        System.out.println(myThread.isInterrupted()); // - узнать остановлен ли поток (*странно рабоатет);
-        System.out.println(myThread.getName()); // - узнать имя потока;
-        myThread.setName(".setName of myThread"); // - установить имя потока;
-        myThread.setPriority(1); // - установить приоритет;
-        System.out.println(myThread.getPriority()); // - узнать приоритет потока;
-        Thread.sleep(10000); // - задержка выполнения потока (можно применять c хаком с while(myThread.isAlive){Thread.sleep(100)};
-        Thread.yield(); // - "заставляет" уйти с текущего потока и переклються на другие;
-        myThread.join(); // - "заставляет" ждать выполнение текущего потока(можно указать время ожидания в милисекундах);
-        System.out.println(Thread.currentThread()); // - получить текущий выполняемый поток;*/
+//        myThread.start(); // - запуск выполнения потока;
+//        System.out.println(myThread.isAlive()); // - проверяет работает ли все еще поток, возвращает значение boolean;
+//        System.exit(0); // - просто вышел с потока (не метод "потоков");
+//        myThread.interrupt(); // - дать совет планировщику потоков завершить выбранный поток;
+//        System.out.println(myThread.isInterrupted()); // - узнать остановлен ли поток (*странно рабоатет);
+//        System.out.println(myThread.getName()); // - узнать имя потока;
+//        myThread.setName(".setName of myThread"); // - установить имя потока;
+//        myThread.setPriority(Thread.MAX_PRIORITY); // - установить приоритет (MIN, NORMAL, MAX);
+//        myThread.setPriority(10); // - установить приоритет (1 - min, 10 - max);
+//        System.out.println(myThread.getPriority()); // - узнать приоритет потока;
+//        Thread.sleep(10000); // - задержка выполнения потока (можно применять c хаком с while(myThread.isAlive){Thread.sleep(100)};
+//        Thread.yield(); // - "заставляет" уйти с текущего потока и переклються на другие;
+//        myThread.join(); // - "заставляет" ждать выполнение текущего потока(можно указать время ожидания в милисекундах);
+//        System.out.println(Thread.currentThread()); // - получить текущий выполняемый поток;
 
 
 //------------------------------------------------------------------------------------------
