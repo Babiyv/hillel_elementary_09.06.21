@@ -3,7 +3,6 @@ package lesson19.homework;
 import lesson19.homework.thread.ExtendsThread;
 import lesson19.homework.thread.ImplementsCallable;
 import lesson19.homework.thread.ImplementsRunnable;
-import lesson19.homework.utils.ExtraClass;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
